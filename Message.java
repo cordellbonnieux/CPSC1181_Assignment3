@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Message {
 	
-	private static ArrayList<Integer> numOfChars = new ArrayList<Integer>();
+	private static ArrayList<Integer> counter = new ArrayList<Integer>();
 
 	public enum Status { READ, UNREAD, STARRED };
 	
@@ -10,16 +10,18 @@ public class Message {
 	private String sender;
 	private String recipient;
 	private Status status;
+	private int counterIndex;
 	
-	void Message(String t, String s, String r, Status x) {
+	public Message(String t, String s, String r, Status x) {
 		this.text = t;
 		this.sender = s;
 		this.recipient = r;
 		this.status = x;
-		numOfChars.add(t.length());
+		counter.add(t.length());
+		counterIndex = counter.size() - 1;
 	}
 	
-	void Message(String t, String s, String r) {
+	public Message(String t, String s, String r) {
 		this.text = t;
 		this.sender = s;
 		this.recipient = r;
@@ -45,28 +47,33 @@ public class Message {
 		Status s = this.status;
 		return s;
 	}
+	
 	public void setStatus(Status s) {
 		this.status = s;
 	}
 	
+	public int getCounterIndex() {
+		int n = this.counterIndex;
+		return n;
+	}
+	
 	public static int getTotalNumberOfMessages() {
-		int n = numOfChars.size();
+		int n = counter.size();
 		return n;
 	}
 	
 	public static int getTotalNumberOfChars(int index) {
-		int n = numOfChars.get(index);
+		int n = counter.get(index);
 		return n;
 	}
-	
+		
 	public static int getTotalNumberOfChars() {
 		int n = 0;
-		for (int i = 0; i < numOfChars.size(); i++) {
-			n += numOfChars.get(i);
+		for (int i = 0; i < counter.size(); i++) {
+			n += counter.get(i);
 		}
 		return n;
 	}
-	
 	
 	public String toString() {
 		String out = "*** Message Info ***\n";
