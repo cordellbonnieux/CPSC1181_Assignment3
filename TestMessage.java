@@ -1,4 +1,8 @@
-import jdk.net.SocketFlow.Status;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+//import jdk.net.SocketFlow.Status;
 
 public class TestMessage {
 	
@@ -21,6 +25,11 @@ public class TestMessage {
 	String recipient2 = "Cordie";
 	Message message2 = new Message(text2, sender2, recipient2);
 	
+	@Test
+	@DisplayName("Get Text")
+	void testGetText() {
+		assertEquals(text1, message1.getText());
+	}
 	
 	
 }
