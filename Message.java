@@ -44,7 +44,7 @@ public class Message {
 	}
 	
 	/**
-	 * Secondary constructor, the Status object for instances 
+	 * Short constructor, the Status object for instances 
 	 * created by this constructor are set to UNREAD.
 	 * @param t String - main body of message
 	 * @param s String - sender's name
@@ -156,7 +156,7 @@ public class Message {
 		out += "Recipient: " + this.recipient + "\n";
 		out += "Status: " + this.status + "\n";
 		out += "Message Text: " + this.text + "\n";
-		out += "Total Characters: " + Message.getNumberOfChars(this.getCounterIndex()) + "\n";
+		out += "Total Number of Characters: " + Message.getNumberOfChars(this.getCounterIndex()) + "\n";
 		out += "Message #: " + (this.getCounterIndex() + 1) + ", Counter Index: " + this.getCounterIndex() + "\n";
 		return out;
 	}
