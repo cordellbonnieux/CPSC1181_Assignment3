@@ -1,15 +1,33 @@
 import java.util.ArrayList;
 
+/**
+ * This class creates a Messenger object which can be used to store Message objects and associated usernames(Strings).
+ * Used to store converations between different users.
+ * @author Cordell Bonnieux
+ * @since October 2021
+ */
 public class Messenger {
 	
+	/**
+	 * Data member ArrayLists
+	 */
 	private ArrayList<String> usernames;
 	private ArrayList<Message> messages;
 	
+	/**
+	 * Messenger Constructor
+	 * Creates a new Messenger object
+	 */
 	public Messenger() {
 		this.usernames = new ArrayList<String>();
 		this.messages = new ArrayList<Message>();
 	}
 	
+	/**
+	 * Add User
+	 * Appends a valid user to a Messenger instance
+	 * @param username
+	 */
 	public void addUser(String username) {
 		if (username.equals(null)) {
 			throw new NullPointerException();
@@ -17,6 +35,13 @@ public class Messenger {
 		this.usernames.add(username);
 	}
 	
+	/**
+	 * Send Messages
+	 * Creates a new message instances and adds it to a Messenger instance
+	 * @param sender String - sender's name
+	 * @param receiver String - receiver's name
+	 * @param text String - Main body of text
+	 */
 	public void sendMessage(String sender, String receiver, String text) {
 		if (sender.equals(null) || receiver.equals(null) || text.equals(null)){
 			throw new NullPointerException();
@@ -32,6 +57,14 @@ public class Messenger {
 		messages.add(message);
 	}
 	
+	/**
+	 * Get Received Messages
+	 * Returns an ArrayList which includes all the message from user, which have a state of status
+	 * If status is UNREAD, it is then set to READ
+	 * @param user String - a valid username
+	 * @param status Status - status type of messages to be return
+	 * @return ArrayList<Message> - list of all requested messages
+	 */
 	public ArrayList<Message> getReceivedMessages(String user, Message.Status status) {
 		if (status.equals(null)) {
 			throw new NullPointerException();
@@ -57,6 +90,13 @@ public class Messenger {
 		return list;
 	}
 	
+	/**
+	 * Get Recieved Messages
+	 * Returns all the messages from user in an ArrayList, if messages are UNREAD
+	 * they will be changed to READ
+	 * @param user String - a valid username
+	 * @return ArrayList<Message> - list of all messages associated with user
+	 */
 	public ArrayList<Message> getReceivedMessages(String user) {
 		if (user.equals(null)) {
 			throw new NullPointerException();
@@ -73,7 +113,6 @@ public class Messenger {
 			}
 			list.add(messages.get(i));
 		}
-		
 		return list;
 	}
 
