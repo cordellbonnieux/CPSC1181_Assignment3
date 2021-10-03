@@ -35,14 +35,22 @@ public class Message {
 	 * @param x Status - current status of message
 	 */
 	public Message(String t, String s, String r, Status x) {
+		if (x.equals(null)) {
+			throw new NullPointerException("Status must not be null");
+			
+		} else if (t.equals(null) || s.equals(null) || r.equals(null)) {
+			throw new NullPointerException("String parameters cannot be null");
+		}
+		
 		this.text = t;
 		this.sender = s;
 		this.recipient = r;
 		this.status = x;
 		counter.add(t.length());
+		this.counterIndex = counter.size() - 1;
+		
 		System.out.println("\n *****************");
 		System.out.println("Added: " + t + "\n ");
-		this.counterIndex = counter.size() - 1;
 		System.out.println("array size: " + Message.counter.size());
 		System.out.println("***************** \n");
 	}
@@ -108,6 +116,9 @@ public class Message {
 	 * @param s Status - a Status enum to assign to the current instance
 	 */
 	public void setStatus(Status s) {
+		if (s.equals(null)) {
+			throw new IllegalArgumentException("Status must not be null");
+		}
 		this.status = s;
 	}
 
@@ -128,6 +139,11 @@ public class Message {
 	 * @return int n - the number of characters in the Message object at position index
 	 */
 	public static int getNumberOfChars(int index) {
+		if (index < 0) {
+			throw new IllegalArgumentException("index must not be negative");
+		} else if (index > Message.counter.size() - 1) {
+			throw new IllegalArgumentException("parameter index greater than maximum index");
+		}
 		int n = counter.get(index);
 		return n;
 	}

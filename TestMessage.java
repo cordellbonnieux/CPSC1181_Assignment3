@@ -1,4 +1,6 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +35,42 @@ public class TestMessage {
 		String recipient2 = "Cordie";
 		Message message2 = new Message(text2, sender2, recipient2);
 		return message2;
+	}
+	
+	@Test
+	@DisplayName("Constructors Test")
+	void testConstructors() {
+		try {
+			Message message = new Message("Some text", "john", "terry", null);
+			fail("Status as null should throw an exception.");
+			
+		} catch (NullPointerException e) {
+			assertEquals(null, e.getMessage());
+		}
+		
+		try {
+			Message message = new Message(null, "john", "terry");
+			fail("text as null should throw an exception.");
+			
+		} catch (NullPointerException e) {
+			assertEquals(null, e.getMessage());
+		}
+		
+		try {
+			Message message = new Message("Some text", null, "terry");
+			fail("text as null should throw an exception.");
+			
+		} catch (NullPointerException e) {
+			assertEquals(null, e.getMessage());
+		}
+		
+		try {
+			Message message = new Message("Some text", "john", null);
+			fail("text as null should throw an exception.");
+			
+		} catch (NullPointerException e) {
+			assertEquals(null, e.getMessage());
+		}
 	}
 
 	
