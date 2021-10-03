@@ -1,6 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ public class TestMessage {
 	 * First Message Object
 	 * Using default constructor
 	 * @return Message message1
-	 * @Ignore 
 	 */
 	public static Message message1() {
 		String text1 = "Don't be a bad kitty!";
@@ -22,12 +20,10 @@ public class TestMessage {
 		return message1;
 	}
 
-
 	/**
 	 * Second Message Object
 	 * Using short constructor
 	 * @return Message message2
-	 * @Ignore
 	 */
 	public static Message message2() {
 		String text2 = "Give me treats!";
@@ -82,7 +78,6 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Text")
 	void testGetText() {
-		System.out.println("entered get text test");
 		assertEquals("Don't be a bad kitty!", message1().getText());
 		assertEquals("Give me treats!", message2().getText());
 	}
@@ -90,7 +85,6 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Sender")
 	void testGetSender() {
-		System.out.println("entered get sender test");
 		assertEquals("Cordie", message1().getSender());
 		assertEquals("Moro", message2().getSender());
 	}
@@ -98,7 +92,6 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Recipient")
 	void testGetRecipient() {
-		System.out.println("entered get recipient test");
 		assertEquals("Moro", message1().getRecipient());
 		assertEquals("Cordie", message2().getRecipient());
 	}
@@ -106,7 +99,6 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Status")
 	void testGetStatus() {
-		System.out.println("entered get status test");
 		assertEquals(Message.Status.READ, message1().getStatus());
 		assertEquals(Message.Status.UNREAD, message2().getStatus());
 	}
@@ -114,7 +106,6 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Counter Index")
 	void testGetCounterIndex() {
-		System.out.println("entered get index test");
 		// every instance's is accumulated in Message.java
 		// reset the counter for accurate results
 		Message.resetCounter();
@@ -145,7 +136,15 @@ public class TestMessage {
 		message2.setStatus(starred);
 		
 		assertEquals(starred, message1.getStatus());
-		assertEquals(starred, message2.getStatus());		
+		assertEquals(starred, message2.getStatus());
+		
+		try {
+			message1.setStatus(null);
+			fail("Set Status to null should throw exception");
+			
+		} catch (NullPointerException e) {
+			assertEquals(null, e.getMessage());
+		}
 	}
 	
 	
@@ -181,5 +180,22 @@ public class TestMessage {
 		Message message2 = message2();
 		assertEquals(message1.getText().length(), Message.getNumberOfChars(message1.getCounterIndex()));
 		assertEquals(message2.getText().length(), Message.getNumberOfChars(message2.getCounterIndex()));
+		
+		try {
+			Message.getNumberOfChars(-1);
+			fail("Negative index should throw an exception");
+			
+		} catch (IllegalArgumentException e) {
+			assertEquals("index must not be negative", e.getMessage());
+		}
+		
+		try {
+			Message.getNumberOfChars(Message.getTotalNumberOfMessages());
+			fail("Index larger than Message.counter index should throw an exception");
+			
+		} catch (IllegalArgumentException e) {
+			assertEquals("parameter index greater than maximum index", e.getMessage());
+		}
+		
 	}
 }

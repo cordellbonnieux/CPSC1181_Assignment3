@@ -41,18 +41,12 @@ public class Message {
 		} else if (t.equals(null) || s.equals(null) || r.equals(null)) {
 			throw new NullPointerException("String parameters cannot be null");
 		}
-		
 		this.text = t;
 		this.sender = s;
 		this.recipient = r;
 		this.status = x;
 		counter.add(t.length());
-		this.counterIndex = counter.size() - 1;
-		
-		System.out.println("\n *****************");
-		System.out.println("Added: " + t + "\n ");
-		System.out.println("array size: " + Message.counter.size());
-		System.out.println("***************** \n");
+		this.counterIndex = counter.size() - 1;		
 	}
 	
 	/**
@@ -117,7 +111,7 @@ public class Message {
 	 */
 	public void setStatus(Status s) {
 		if (s.equals(null)) {
-			throw new IllegalArgumentException("Status must not be null");
+			throw new NullPointerException("Status must not be null");
 		}
 		this.status = s;
 	}
