@@ -10,7 +10,7 @@ public class Message {
 	 * counter is used to keep track of the length of every message created by the class's constructors
 	 * the index of the counter implicitly keeps track of the number of Message objects instantiated.
 	 */
-	private static ArrayList<Integer> counter = new ArrayList<Integer>();
+	private static ArrayList<Integer> counter = new ArrayList<Integer>(0); // change back to private after
 
 	/*
 	 * Status enumerator is used to keep track of a Message object's current status.
@@ -40,7 +40,11 @@ public class Message {
 		this.recipient = r;
 		this.status = x;
 		counter.add(t.length());
-		counterIndex = counter.size() - 1;
+		System.out.println("\n *****************");
+		System.out.println("Added: " + t + "\n ");
+		this.counterIndex = counter.size() - 1;
+		System.out.println("array size: " + Message.counter.size());
+		System.out.println("***************** \n");
 	}
 	
 	/**
@@ -51,12 +55,7 @@ public class Message {
 	 * @param r String - recipient's name
 	 */
 	public Message(String t, String s, String r) {
-		this.text = t;
-		this.sender = s;
-		this.recipient = r;
-		this.status = Status.UNREAD;
-		counter.add(t.length());
-		counterIndex = counter.size() - 1;
+		this(t, s, r, Status.UNREAD);
 	}
 	
 	/**
@@ -96,14 +95,6 @@ public class Message {
 	}
 	
 	/**
-	 * Set Status
-	 * @param s Status - a Status enum to assign to the current instance
-	 */
-	public void setStatus(Status s) {
-		this.status = s;
-	}
-	
-	/**
 	 * Get Counter Index
 	 * @return int n - the instance's index in the class message counter
 	 */
@@ -112,6 +103,14 @@ public class Message {
 		return n;
 	}
 	
+	/**
+	 * Set Status
+	 * @param s Status - a Status enum to assign to the current instance
+	 */
+	public void setStatus(Status s) {
+		this.status = s;
+	}
+
 	/**
 	 * Get Total Number Of Messages
 	 * Static class method
