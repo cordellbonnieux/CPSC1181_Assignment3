@@ -10,15 +10,15 @@ public class Messenger {
 		this.messages = new ArrayList<Message>();
 	}
 	
-	void addUser(String username) {
-		if (username.contentEquals(null)) {
+	public void addUser(String username) {
+		if (username.equals(null)) {
 			throw new NullPointerException();
 		}
 		this.usernames.add(username);
 	}
 	
-	void sendMessage(String sender, String receiver, String text) {
-		if (sender.contentEquals(null) || receiver.contentEquals(null) || text.contentEquals(null)){
+	public void sendMessage(String sender, String receiver, String text) {
+		if (sender.equals(null) || receiver.equals(null) || text.equals(null)){
 			throw new NullPointerException();
 			
 		} else if (!usernames.contains(sender)) {
@@ -30,6 +30,51 @@ public class Messenger {
 
 		Message message = new Message(text, sender, receiver);
 		messages.add(message);
+	}
+	
+	public ArrayList<Message> getReceivedMessages(String user, Message.Status status) {
+		if (status.equals(null)) {
+			throw new NullPointerException();
+			
+		} else if (user.equals(null)) {
+			throw new NullPointerException();
+			
+		} else if (!usernames.contains(user)) {
+			throw new IllegalArgumentException("User not found in usernames");
+		}
+		
+		ArrayList<Message> list = new ArrayList<Message>();
+		
+		for (int i = 0; i < messages.size(); i++) {
+			if (messages.get(i).getStatus().equals(status)) {		
+				if (status.equals(Message.Status.UNREAD)) {
+					messages.get(i).setStatus(Message.Status.READ);	
+				}
+				list.add(messages.get(i));
+			}
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Message> getReceivedMessages(String user) {
+		if (user.equals(null)) {
+			throw new NullPointerException();
+			
+		} else if (!usernames.contains(user)) {
+			throw new IllegalArgumentException("User not found in usernames");
+		}
+		
+		ArrayList<Message> list = new ArrayList<Message>();
+		
+		for (int i = 0; i < messages.size(); i++) {
+			if (messages.get(i).getStatus().equals(Message.Status.UNREAD)) {
+				messages.get(i).setStatus(Message.Status.READ);
+			}
+			list.add(messages.get(i));
+		}
+		
+		return list;
 	}
 
 }

@@ -114,6 +114,7 @@ public class Message {
 			throw new NullPointerException("Status must not be null");
 		}
 		this.status = s;
+		// maybe add a switch statement here to handle enum?
 	}
 
 	/**
