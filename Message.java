@@ -10,7 +10,7 @@ public class Message {
 	 * counter is used to keep track of the length of every message created by the class's constructors
 	 * the index of the counter implicitly keeps track of the number of Message objects instantiated.
 	 */
-	private static ArrayList<Integer> counter = new ArrayList<Integer>(0); // change back to private after
+	private static ArrayList<Integer> counter = new ArrayList<Integer>();
 
 	/*
 	 * Status enumerator is used to keep track of a Message object's current status.
@@ -143,6 +143,14 @@ public class Message {
 			n += counter.get(i);
 		}
 		return n;
+	}
+	
+	/**
+	 * Reset Counter
+	 * Static class method
+	 */
+	public static void resetCounter() {
+		counter = new ArrayList<Integer>();
 	}
 	
 	/**

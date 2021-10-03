@@ -77,6 +77,10 @@ public class TestMessage {
 	@DisplayName("Get Counter Index")
 	void testGetCounterIndex() {
 		System.out.println("entered get index test");
+		// every instance's is accumulated in Message.java
+		// reset the counter for accurate results
+		Message.resetCounter();
+		
 		assertEquals(0, message1().getCounterIndex());
 		assertEquals(1, message2().getCounterIndex());
 	}
@@ -92,15 +96,18 @@ public class TestMessage {
 		// starred status for testing
 		Message.Status starred = Message.Status.STARRED;
 		
-		assertEquals(Message.Status.READ, message1().getStatus());
-		assertEquals(Message.Status.UNREAD, message2().getStatus());
+		Message message1 = message1();
+		Message message2 = message2();
+		
+		assertEquals(Message.Status.READ, message1.getStatus());
+		assertEquals(Message.Status.UNREAD, message2.getStatus());
 		
 		// Set both to starred
-		message1().setStatus(starred);
-		message2().setStatus(starred);
+		message1.setStatus(starred);
+		message2.setStatus(starred);
 		
-		assertEquals(starred, message1().getStatus());
-		assertEquals(starred, message2().getStatus());		
+		assertEquals(starred, message1.getStatus());
+		assertEquals(starred, message2.getStatus());		
 	}
 	
 	
@@ -112,14 +119,17 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Total Number Of Messages")
 	void testGetTotalNumberOfMessages() {
+		Message.resetCounter();
+		assertEquals(0, Message.getTotalNumberOfMessages());
+		Message message1 = message1();
+		Message message2 = message2();
 		assertEquals(2, Message.getTotalNumberOfMessages());
 	}
 	
 	@Test
 	@DisplayName("Get Total Number Of Characters")
 	void testGetTotalNumberOfChars() {
-		//String one = "Don't be a bad kitty!";
-		//String two = "Give me treats!";
+		Message.resetCounter();
 		Message message1 = message1();
 		Message message2 = message2();
 		assertEquals(message1.getText().length() + message2.getText().length(), Message.getTotalNumberOfChars());
@@ -128,6 +138,7 @@ public class TestMessage {
 	@Test
 	@DisplayName("Get Number Of Characters")
 	void testGetNumberOfChars() {
+		Message.resetCounter();
 		Message message1 = message1();
 		Message message2 = message2();
 		assertEquals(message1.getText().length(), Message.getNumberOfChars(message1.getCounterIndex()));
