@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * This class creates a Messenger object which can be used to store Message objects and associated usernames(Strings).
- * Used to store converations between different users.
+ * Used to store conversations between different users.
  * @author Cordell Bonnieux
  * @since October 2021
  */
@@ -79,7 +79,7 @@ public class Messenger {
 		ArrayList<Message> list = new ArrayList<Message>();
 		
 		for (int i = 0; i < messages.size(); i++) {
-			if (messages.get(i).getStatus().equals(status)) {		
+			if (messages.get(i).getStatus().equals(status) && messages.get(i).getRecipient().equals(user)) {		
 				if (status.equals(Message.Status.UNREAD)) {
 					messages.get(i).setStatus(Message.Status.READ);	
 				}
@@ -91,7 +91,7 @@ public class Messenger {
 	}
 	
 	/**
-	 * Get Recieved Messages
+	 * Get Received Messages
 	 * Returns all the messages from user in an ArrayList, if messages are UNREAD
 	 * they will be changed to READ
 	 * @param user String - a valid username
@@ -108,10 +108,12 @@ public class Messenger {
 		ArrayList<Message> list = new ArrayList<Message>();
 		
 		for (int i = 0; i < messages.size(); i++) {
-			if (messages.get(i).getStatus().equals(Message.Status.UNREAD)) {
-				messages.get(i).setStatus(Message.Status.READ);
+			if (messages.get(i).getRecipient().equals(user)) {
+				if (messages.get(i).getStatus().equals(Message.Status.UNREAD)) {
+					messages.get(i).setStatus(Message.Status.READ);
+				}
+				list.add(messages.get(i));	
 			}
-			list.add(messages.get(i));
 		}
 		return list;
 	}
