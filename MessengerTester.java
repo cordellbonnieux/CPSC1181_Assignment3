@@ -16,5 +16,11 @@ public class MessengerTester {
 		System.out.println(conversation.getReceivedMessages("Donnie", Message.Status.UNREAD));
 		System.out.println(conversation.getReceivedMessages("Bird", Message.Status.READ));
 		System.out.println(conversation.getReceivedMessages("Donnie"));
+		
+		// test smile message
+		// ask - create a getter for the user ArrayList in the normal way??
+		conversation.sendSmileMessage("Donnie", "Bird");
+		System.out.println(conversation.getReceivedMessages("Bird"));
+		
 	}
 }

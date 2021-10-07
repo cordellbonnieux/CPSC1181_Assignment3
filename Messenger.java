@@ -36,7 +36,7 @@ public class Messenger {
 	}
 	
 	/**
-	 * Send Messages
+	 * Send Message
 	 * Creates a new message instances and adds it to a Messenger instance
 	 * @param sender String - sender's name
 	 * @param receiver String - receiver's name
@@ -56,7 +56,28 @@ public class Messenger {
 		Message message = new Message(text, sender, receiver);
 		messages.add(message);
 	}
-	
+
+	/**
+	 * Send a Smile Message
+	 * Creates a new smile message instance and adds it to a Messenger instance
+	 * @param sender String - sender's name
+	 * @param receiver String - receiver's name
+	 */
+	public void sendSmileMessage(String sender, String receiver) {
+		if (sender.equals(null) || receiver.equals(null)){
+			throw new NullPointerException();
+			
+		} else if (!usernames.contains(sender)) {
+			throw new IllegalArgumentException("Sender not found in usernames");
+			
+		} else if (!usernames.contains(receiver)) {
+			throw new IllegalArgumentException("Receiver not found in usernames");
+		}
+
+		SmileMessage message = new SmileMessage(sender, receiver);
+		messages.add(message);	
+	}
+		
 	/**
 	 * Get Received Messages
 	 * Returns an ArrayList which includes all the message from user, which have a state of status
