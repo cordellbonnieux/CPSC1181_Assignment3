@@ -6,8 +6,8 @@ import java.util.Scanner;
  */
 public class MultiLineEntry extends UserEntry {
 	
-	public MultiLineEntry(Scanner s, String t) {
-		super(s, t);
+	public MultiLineEntry(Scanner s, String p) {
+		super(s, p);
 	}
 	
 	public String getUserResponse() {
@@ -18,6 +18,7 @@ public class MultiLineEntry extends UserEntry {
 			if (this.scan.nextLine() == "") {
 				reading = false;
 			} else {
+				// might need to add a new line to the user side console 
 				text += this.scan.nextLine() + "\n";
 			}
 		}
