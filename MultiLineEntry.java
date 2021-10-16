@@ -11,18 +11,19 @@ public class MultiLineEntry extends UserEntry {
 	}
 	
 	public String getUserResponse() {
-		System.out.print(this.prompt);
-		boolean reading = true;
-		String text = "";
-		while(reading) {
-			if (this.scan.nextLine() == "") {
-				reading = false;
+		System.out.println(this.prompt);
+		String text = ""; //this.scan.next();
+		//this.scan.nextLine();
+		boolean read = true;
+		
+		while(read) {
+			String line = this.scan.nextLine();
+			if (line.contentEquals("")) {
+				read = false;
 			} else {
-				// might need to add a new line to the user side console 
-				text += this.scan.nextLine() + "\n";
+				text += line + "\n";
 			}
 		}
-		return text;
+		return text.trim();
 	}
-	
 }

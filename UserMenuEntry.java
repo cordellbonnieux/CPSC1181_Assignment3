@@ -43,14 +43,14 @@ public class UserMenuEntry extends UserEntry{
 			choice = this.scan.nextLine();
 			int intChoice = Integer.parseInt(choice);
 			
-			if (intChoice <= this.options.size() && intChoice >= 0) {
+			if (intChoice <= this.options.size() && intChoice >= 1) {
 				choice = this.options.get(intChoice - 1);
 			} else {
 				System.out.println("Invalid entry \n");
+				choice = "";
 			}
 		}
-		
-		
+		System.out.println("User Chose: " + choice);
 		return choice;
 	}
 }
