@@ -5,8 +5,13 @@ import java.util.Scanner;
  *
  */
 public abstract class UserEntry {
-	protected final Scanner scan = new Scanner(System.in);
-	protected final String text = "Enter a number from the choices above:";
+	protected final Scanner scan;
+	protected final String prompt;
+	
+	public UserEntry(Scanner s, String p) {
+		this.scan = s;
+		this.prompt = p;
+	}
 	
 	public abstract String getUserResponse();
 }

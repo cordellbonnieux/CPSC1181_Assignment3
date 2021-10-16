@@ -6,7 +6,8 @@ import java.util.Scanner;
  *
  */
 public class UserMenuEntry extends UserEntry{
-	private ArrayList<String> options = new ArrayList<String>();
+	private ArrayList<String> options = new ArrayList<String>(7);
+	
 	options.add("See All Messages");
 	options.add("See Unread Messages");
 	options.add("Send Message");
@@ -17,7 +18,7 @@ public class UserMenuEntry extends UserEntry{
 	
 	public UserMenuEntry(Scanner scan, ArrayList<String> list) {
 		// "enter from the choices above" <- set prompt?
-		super(scan,list.get(0));
+		//super(scan,list.get(0));
 	}
 	
 	public String getUserResponse() {

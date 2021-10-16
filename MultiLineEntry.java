@@ -7,16 +7,16 @@ import java.util.Scanner;
 public class MultiLineEntry extends UserEntry {
 	
 	public MultiLineEntry(Scanner s, String t) {
-		super(s,t);
-		
+		super(s, t);
 	}
 	
 	public String getUserResponse() {
-		boolean read = true;
+		System.out.print(this.prompt);
+		boolean reading = true;
 		String text = "";
-		while(read) {
+		while(reading) {
 			if (this.scan.nextLine() == "") {
-				read = false;
+				reading = false;
 			} else {
 				text += this.scan.nextLine() + "\n";
 			}
