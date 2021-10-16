@@ -19,8 +19,9 @@ public class MessengerTester {
 		
 		// test smile message
 		// ask - create a getter for the user ArrayList in the normal way??
-		conversation.sendSmileMessage("Donnie", "Bird");
+		conversation.sendSmile("Donnie", "Bird");
 		System.out.println(conversation.getReceivedMessages("Bird"));
+		System.out.println(conversation.getUsers());
 		
 	}
 }

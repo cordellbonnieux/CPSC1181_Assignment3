@@ -1,4 +1,3 @@
-
 public class SmileMessage extends Message{
 	private static String text = "\n" +
 			"                                    ▓▓██████████████████                                        \n" + 

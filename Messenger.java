@@ -63,7 +63,7 @@ public class Messenger {
 	 * @param sender String - sender's name
 	 * @param receiver String - receiver's name
 	 */
-	public void sendSmileMessage(String sender, String receiver) {
+	public void sendSmile(String sender, String receiver) {
 		if (sender.equals(null) || receiver.equals(null)){
 			throw new NullPointerException();
 			
@@ -137,6 +137,15 @@ public class Messenger {
 			}
 		}
 		return list;
+	}
+	
+	/**
+	 * Get Users
+	 * Returns all the users in the messager  
+	 * @return ArrayList<String> - a list of all usernames in the messenger object.
+	 */
+	public ArrayList<String> getUsers() {
+		return new ArrayList<String>(this.usernames);
 	}
 
 }
