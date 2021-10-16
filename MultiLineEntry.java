@@ -12,8 +12,7 @@ public class MultiLineEntry extends UserEntry {
 	
 	public String getUserResponse() {
 		System.out.println(this.prompt);
-		String text = ""; //this.scan.next();
-		//this.scan.nextLine();
+		String text = "";
 		boolean read = true;
 		
 		while(read) {
