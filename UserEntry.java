@@ -1,17 +1,12 @@
 import java.util.Scanner;
 /**
  * 
- * @author cordell
+ * @author Cordell Bonnieux
  *
  */
 public abstract class UserEntry {
-	protected final Scanner scan;
-	protected final String text;
-	
-	public UserEntry(Scanner s, String t) {
-		this.scan = s;
-		this.text = t;
-	}
+	protected final Scanner scan = new Scanner(System.in);
+	protected final String text = "Enter a number from the choices above:";
 	
 	public abstract String getUserResponse();
 }

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 /**
  * 
- * @author cordell
+ * @author Cordell Bonnieux
  *
  */
 public class MultiLineEntry extends UserEntry {
