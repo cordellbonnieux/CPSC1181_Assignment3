@@ -26,12 +26,21 @@ public class MessengerProgram {
 		MultiLineEntry text = new MultiLineEntry(s, "Enter your message: ");
 		
 		// get active user
-		String user = users.getUserResponse();
+		String user = "";
 
 		MessengerProgram prog = new MessengerProgram(s, msg, main, users, text, user);
 		prog.execute();
 	}
 	
+	/**
+	 * Class Constructor
+	 * @param sc
+	 * @param msg
+	 * @param main
+	 * @param user
+	 * @param text
+	 * @param active
+	 */
 	public MessengerProgram(Scanner sc, Messenger msg, UserMenuEntry main, UserMenuEntry user, MultiLineEntry text, String active) {
 		this.scan = sc;
 		this.messenger = msg;
@@ -42,7 +51,43 @@ public class MessengerProgram {
 	}
 	
 	public void execute() {
+		// user selects their username from the list
+		this.activeUser = this.userMenu.getUserResponse();
 		
+		// user selects what to do next
+		String selection = this.mainMenu.getUserResponse();
+		int index = getIndex(selection, mainMenu());
+		
+		switch(index) {
+			case 0: this.messenger.getReceivedMessages(this.activeUser);
+				break;
+			case 1: this.messenger.getReceivedMessages(this.activeUser, Message.Status.UNREAD);
+				break;
+			case 2: System.out.println("Who would you like to message?");
+			this.messenger.sendMessage(this.activeUser, this.userMenu.getUserResponse(), this.textEntry.getUserResponse());
+				break;
+			case 3: // do something
+				break;
+			case 4: // do something
+				break;
+			case 5: // do something
+				break;
+			case 6: // do something
+				break;
+			case 7: // do something
+				break;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param t
+	 */
+	public void setActiveUser(String t) {
+		if (t.equals(null)) {
+			throw new NullPointerException();
+		}
+		this.activeUser = t;
 	}
 	
 	/**
@@ -83,5 +128,19 @@ public class MessengerProgram {
 			}
 		}
 		return list;
+	}
+	
+	/**
+	 * Used 
+	 * @param s
+	 * @return
+	 */
+	private static int getIndex(String s, ArrayList<String> menu) {
+		for (int i = 0; i < menu.size(); i++) {
+			if (s.equals(mainMenu().get(i))) {
+				return i;
+			}
+		}
+		return 99;
 	}
 }
