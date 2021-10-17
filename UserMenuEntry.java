@@ -6,20 +6,21 @@ import java.util.Scanner;
  *
  */
 public class UserMenuEntry extends UserEntry{
-	private ArrayList<String> options; //= addOptions();
+	private ArrayList<String> options;
 	
-
-	
+	/**
+	 * 
+	 * @param s
+	 * @param l
+	 */
 	public UserMenuEntry(Scanner s, ArrayList<String> l) {
 		super(s, "Enter a number from the choices above:");
-		//this.options.addAll(l);
 		this.options = new ArrayList<String>(l);
 	}
 	
-	public UserMenuEntry(Scanner s) {
-		this(s, new ArrayList<String>(0));
-	}
-		
+	/**
+	 * 
+	 */
 	public String getUserResponse(){
 		String choice = "";
 		

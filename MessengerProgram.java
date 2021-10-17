@@ -11,10 +11,24 @@ public class MessengerProgram {
 
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		Messenger msg = new Messenger();
-
 		
-		MessengerProgram prog = new MessengerProgram(s, );
+		// set up messenger and add users
+		Messenger msg = new Messenger();
+		msg.addUsers(scanUsers(s));
+		
+		// set up main menu
+		UserMenuEntry main = new UserMenuEntry(s, mainMenu());
+		
+		// set up user list
+		UserMenuEntry users = new UserMenuEntry(s, msg.getUsers());
+		
+		// set up text entry
+		MultiLineEntry text = new MultiLineEntry(s, "Enter your message: ");
+		
+		// get active user
+		String user = users.getUserResponse();
+
+		MessengerProgram prog = new MessengerProgram(s, msg, main, users, text, user);
 		prog.execute();
 	}
 	
@@ -31,7 +45,12 @@ public class MessengerProgram {
 		
 	}
 	
-	private ArrayList<String> mainMenu() {
+	/**
+	 * Main Menu
+	 * Sets up a main menu
+	 * @return ArrayList<String> each string representing a choice in the menu
+	 */
+	private static ArrayList<String> mainMenu() {
 		ArrayList<String> list = new ArrayList<String>(7);
 		list.add("See All Messages");
 		list.add("See Unread Messages");
@@ -43,7 +62,13 @@ public class MessengerProgram {
 		return list; 
 	}
 	
-	private ArrayList<String> addUsers(Scanner s) {
+	/**
+	 * Add Users 
+	 * Scans the user's input and creates a list of usernames to be used in the program
+	 * @param s Scanner 
+	 * @return ArrayList<String> of usernames
+	 */
+	private static ArrayList<String> scanUsers(Scanner s) {
 		System.out.println("Please add some users (one per line).");
 		ArrayList<String> list = new ArrayList<String>();
 		boolean reading = true;
