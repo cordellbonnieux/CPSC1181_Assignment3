@@ -6,13 +6,14 @@ import java.util.Scanner;
  *
  */
 public class UserMenuEntry extends UserEntry{
-	private ArrayList<String> options = addOptions();
+	private ArrayList<String> options; //= addOptions();
 	
 
 	
 	public UserMenuEntry(Scanner s, ArrayList<String> l) {
 		super(s, "Enter a number from the choices above:");
-		this.options.addAll(l);
+		//this.options.addAll(l);
+		this.options = new ArrayList<String>(l);
 	}
 	
 	public UserMenuEntry(Scanner s) {
@@ -62,6 +63,13 @@ public class UserMenuEntry extends UserEntry{
 		return choice;
 	}
 	
+	/**
+	 * isInt 
+	 * Validates the inputed string, if valid it is safe to convert to integer
+	 * (without having to deal with exceptions)
+	 * @param t String - input string to be validated
+	 * @return boolean true if string is valid, false otherwise
+	 */
 	private boolean isInt(String t){
 		if (t.equals(null)) {
 			return false;
