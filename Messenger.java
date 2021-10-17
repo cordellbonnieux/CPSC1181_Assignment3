@@ -36,6 +36,18 @@ public class Messenger {
 	}
 	
 	/**
+	 * Add Users
+	 * Appends valid users to a Messenger instance
+	 * @param username
+	 */
+	public void addUsers(ArrayList<String> usernames) {
+		if (usernames.equals(null)) {
+			throw new NullPointerException();
+		}
+		this.usernames.addAll(usernames);
+	}
+	
+	/**
 	 * Send Message
 	 * Creates a new message instances and adds it to a Messenger instance
 	 * @param sender String - sender's name

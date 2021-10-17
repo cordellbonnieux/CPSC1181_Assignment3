@@ -19,19 +19,7 @@ public class UserMenuEntry extends UserEntry{
 	public UserMenuEntry(Scanner s) {
 		this(s, new ArrayList<String>(0));
 	}
-	
-	private ArrayList<String> addOptions() {
-		ArrayList<String> list = new ArrayList<String>(7);
-		list.add("See All Messages");
-		list.add("See Unread Messages");
-		list.add("Send Message");
-		list.add("Send Smile");
-		list.add("Switch Active User");
-		list.add("See Messenger Stats");
-		list.add("Exit");
-		return list; 
-	}
-	
+		
 	public String getUserResponse(){
 		String choice = "";
 		
