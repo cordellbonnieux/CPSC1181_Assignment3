@@ -13,19 +13,20 @@ public class MessengerProgram {
 		Scanner s = new Scanner(System.in);
 		
 		// set up messenger and add users
-		Messenger msg = new Messenger();
-		msg.addUsers(scanUsers(s));
+		Messenger msg = new Messenger();// move these
+		msg.addUsers(scanUsers(s));// move these
 		
 		// set up main menu
-		UserMenuEntry main = new UserMenuEntry(s, mainMenu());
+		UserMenuEntry main = new UserMenuEntry(s, mainMenu()); // move these
 		
 		// set up user list
-		UserMenuEntry users = new UserMenuEntry(s, msg.getUsers());
+		System.out.println("Who are you?");
+		UserMenuEntry users = new UserMenuEntry(s, msg.getUsers());// move these
 		
 		// set up text entry
-		MultiLineEntry text = new MultiLineEntry(s, "Enter your message: ");
+		MultiLineEntry text = new MultiLineEntry(s, "Enter your message: ");// move these
 		
-		// get active user
+		// active user
 		String user = "";
 
 		MessengerProgram prog = new MessengerProgram(s, msg, main, users, text, user);
@@ -51,32 +52,42 @@ public class MessengerProgram {
 	}
 	
 	public void execute() {
+		
+		boolean exit = false;
+		
 		// user selects their username from the list
 		this.activeUser = this.userMenu.getUserResponse();
 		
-		// user selects what to do next
-		String selection = this.mainMenu.getUserResponse();
-		int index = getIndex(selection, mainMenu());
-		
-		switch(index) {
-			case 0: this.messenger.getReceivedMessages(this.activeUser);
-				break;
-			case 1: this.messenger.getReceivedMessages(this.activeUser, Message.Status.UNREAD);
-				break;
-			case 2: System.out.println("Who would you like to message?");
-			this.messenger.sendMessage(this.activeUser, this.userMenu.getUserResponse(), this.textEntry.getUserResponse());
-				break;
-			case 3: // do something
-				break;
-			case 4: // do something
-				break;
-			case 5: // do something
-				break;
-			case 6: // do something
-				break;
-			case 7: // do something
-				break;
+		// main program loop
+		while (!exit) {
+			
+			// user selects what to do next
+			String selection = this.mainMenu.getUserResponse();
+			int index = getIndex(selection, mainMenu());
+			
+			switch(index) {
+				case 0: System.out.println(this.messenger.getReceivedMessages(this.activeUser));
+					break;
+				case 1: System.out.println(this.messenger.getReceivedMessages(this.activeUser, Message.Status.UNREAD));
+					break;
+				case 2: System.out.println("Who would you like to send a message to?");
+					String textRecipient = this.userMenu.getUserResponse();
+					String messageText = this.textEntry.getUserResponse();
+					this.messenger.sendMessage(this.activeUser, textRecipient, messageText);
+					break;
+				case 3: System.out.println("Who would you like to send a smile to?");
+					String smileRecipient = this.userMenu.getUserResponse();
+					this.messenger.sendSmile(this.activeUser, smileRecipient);
+					break;
+				case 4: System.out.println("Which user would you like to change to?");
+					this.activeUser = this.userMenu.getUserResponse();
+					break;
+				case 5: System.out.println(this.toString());
+					break;
+				case 6: exit = true;
+			}
 		}
+
 	}
 	
 	/**
@@ -120,7 +131,7 @@ public class MessengerProgram {
 		while (reading) {
 			String line = s.nextLine();
 			if (!line.equals(null)) {
-				if (line.length() > 0) {
+				if (line.length() == 0) {
 					reading = false;
 				} else {
 					list.add(line);
@@ -142,5 +153,14 @@ public class MessengerProgram {
 			}
 		}
 		return 99;
+	}
+	
+	@Override
+	public String toString() {
+		String info = "*** Messenger Stats *** \n";
+		info += "Active user: " + this.activeUser + "\n";
+		info += "Users: " + this.messenger.getUsers() + "\n";
+		info += "Number of messages exchanged: " + this.messenger.getNumberOfMessages() + "\n";
+		return info;
 	}
 }

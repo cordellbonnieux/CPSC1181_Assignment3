@@ -48,7 +48,7 @@ public class UserMenuEntry extends UserEntry{
 				choice = "";
 			}
 		}
-		System.out.println("User Choice: " + choice);
+		System.out.println("User Choice: " + choice + "\n");
 		return choice;
 	}
 	

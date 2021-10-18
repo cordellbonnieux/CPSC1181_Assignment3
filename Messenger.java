@@ -159,5 +159,14 @@ public class Messenger {
 	public ArrayList<String> getUsers() {
 		return new ArrayList<String>(this.usernames);
 	}
+	
+	/**
+	 * Get Number Of Messages
+	 * Returns the total number of messages exchanged
+	 * @return int the number of messages sent
+	 */
+	public int getNumberOfMessages() {
+		return this.messages.size();
+	}
 
 }
