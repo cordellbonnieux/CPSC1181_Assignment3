@@ -10,27 +10,21 @@ public class MessengerProgram {
 	private String activeUser;
 
 	public static void main(String[] args) {
+		
+		// create scanner
 		Scanner s = new Scanner(System.in);
-		
-		// set up messenger and add users
-		Messenger msg = new Messenger();// move these
-		msg.addUsers(scanUsers(s));// move these
-		
-		// set up main menu
-		UserMenuEntry main = new UserMenuEntry(s, mainMenu()); // move these
-		
-		// set up user list
-		System.out.println("Who are you?");
-		UserMenuEntry users = new UserMenuEntry(s, msg.getUsers());// move these
-		
-		// set up text entry
-		MultiLineEntry text = new MultiLineEntry(s, "Enter your message: ");// move these
-		
-		// active user
-		String user = "";
 
-		MessengerProgram prog = new MessengerProgram(s, msg, main, users, text, user);
+		// create program object
+		MessengerProgram prog = new MessengerProgram(s, new Messenger(), new UserMenuEntry(s, mainMenu()), new UserMenuEntry(s), new MultiLineEntry(s, "Enter your message: "), "");
+		
+		// execute the program
 		prog.execute();
+		
+		// close scanner
+		s.close();
+		
+		// end program
+		System.exit(0);
 	}
 	
 	/**
@@ -55,7 +49,12 @@ public class MessengerProgram {
 		
 		boolean exit = false;
 		
-		// user selects their username from the list
+		// user enters all the users' names
+		this.messenger.addUsers(scanUsers(this.scan));
+		this.userMenu.addOptions(this.messenger.getUsers());
+		
+		// user selects their user name from the list
+		System.out.println("Who are you?");
 		this.activeUser = this.userMenu.getUserResponse();
 		
 		// main program loop
@@ -85,6 +84,7 @@ public class MessengerProgram {
 				case 5: System.out.println(this.toString());
 					break;
 				case 6: exit = true;
+					System.out.println("Goodbye!");
 			}
 		}
 

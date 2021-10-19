@@ -173,7 +173,7 @@ public class Message {
 		out += "Sender: " + this.sender + "\n";
 		out += "Recipient: " + this.recipient + "\n";
 		out += "Status: " + this.status + "\n";
-		out += "Message Text: " + this.text + "\n";
+		out += "Message Text: \n" + this.text + "\n";
 		out += "Total Number of Characters: " + Message.getNumberOfChars(this.getCounterIndex()) + "\n";
 		out += "Message #" + (this.getCounterIndex() + 1) + ", Counter Index: " + this.getCounterIndex() + "\n";
 		return out;
