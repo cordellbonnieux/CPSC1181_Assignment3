@@ -14,10 +14,11 @@ public class MultiLineEntry extends UserEntry {
 		System.out.println(this.prompt);
 		String text = "";
 		boolean read = true;
+		String line = this.scan.next();
 		
 		while(read) {
-			String line = this.scan.nextLine();
-			if (line.contentEquals("")) {
+			line = this.scan.nextLine();
+			if (line.equals("")) {
 				read = false;
 			} else {
 				text += line + "\n";
